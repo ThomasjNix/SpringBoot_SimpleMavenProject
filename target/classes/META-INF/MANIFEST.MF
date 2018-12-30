@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Simple Maven Project
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Tj
+Implementation-Vendor-Id: io.thomasnix.earlylearning
+Build-Jdk: 1.8.0_45
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/simple-maven-project
+Created-By: Maven Integration for Eclipse
+
