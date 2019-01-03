@@ -1,5 +1,6 @@
 package io.thomasnix.earlylearning.topic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TopicService {
-	private List<Topic> topics = Arrays.asList(
+	private List<Topic> topics = new ArrayList<>(Arrays.asList(
 			new Topic("spring", "Spring Framework", "A framework used to easily generate and implement Spring projects"),
 			new Topic("cars", "Intro to Cars", "Learn everything about the basics of cars"),
 			new Topic("coffee", "How to Make Coffee", "For those Monday mornings")
-	);
+	));
 	
 	/**
 	 * Returs the list of topics (currently hard-coded)
@@ -39,5 +40,13 @@ public class TopicService {
 				.filter(topic -> topic.getId().equals(id))
 				.findFirst()
 				.get();
+	}
+	
+	/**
+	 * Adds the provided to the topic list 
+	 * @param topic
+	 */
+	public void addTopic(Topic topic) {
+		topics.add(topic);
 	}
 }
