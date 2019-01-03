@@ -25,4 +25,19 @@ public class TopicService {
 	public List<Topic> getAllTopics() {
 		return topics;
 	}
+	
+	/**
+	 * Creates a stream of the List of topics, then iterates over
+	 * the list and filters out topics that match the provided ID
+	 * Returns the first topic returned from the filter
+	 * @param id
+	 * @return Topic
+	 */
+	public Topic getTopic(String id) {
+		return topics
+				.stream()
+				.filter(topic -> topic.getId().equals(id))
+				.findFirst()
+				.get();
+	}
 }
