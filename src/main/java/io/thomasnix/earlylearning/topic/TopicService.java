@@ -49,4 +49,31 @@ public class TopicService {
 	public void addTopic(Topic topic) {
 		topics.add(topic);
 	}
+	
+	/**
+	 * Updates the value of the topic with the provided ID
+	 * @param topic
+	 * @param id
+	 */
+	public void updateTopic(Topic topic, String id) {
+		for (int i = 0; i < topics.size(); i = i + 1) {
+			if (topics.get(i).getId().equals(id)) {
+				topics.set(i, topic);
+				return;
+			}
+		}
+	}
+	
+	/**
+	 * Deletes the topic with the provided ID
+	 * @param id
+	 */
+	public void deleteTopic(String id) {
+		for (int i = 0; i < topics.size(); i = i + 1) {
+			if (topics.get(i).getId().equals(id)) {
+				topics.remove(i);
+				return;
+			}
+		}
+	}
 }
