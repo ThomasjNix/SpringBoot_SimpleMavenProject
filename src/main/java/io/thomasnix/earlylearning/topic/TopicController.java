@@ -1,13 +1,20 @@
 package io.thomasnix.earlylearning.topic;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TopicController {
+	
+	/**
+	 * Spring will automatically inject TopicService because of the annotation Autowired
+	 */
+	
+	@Autowired
+	private TopicService topicService;
 
 	/**
 	 * The RequestMapping annotation will automatically convert the POJO returned by
@@ -16,15 +23,11 @@ public class TopicController {
 
 	/**
 	 * Returns a (currently) hard-coded list of Topic objects
-	 * 
+	 * FROM the business service
 	 * @return List<Topic>
 	 */
 	@RequestMapping("/topics")
 	public List<Topic> getAllTopics() {
-		return Arrays.asList(
-				new Topic("spring", "Spring Framework", "A framework used to easily generate and implement Spring projects"),
-				new Topic("cars", "Intro to Cars", "Learn everything about the basics of cars"),
-				new Topic("coffee", "How to Make Coffee", "For those Monday mornings")
-		);
+		return topicService.getAllTopics();
 	}
 }
