@@ -1,67 +1,61 @@
 package io.thomasnix.earlylearning.topic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * The Service is a spring stereotype that marks this class as a Spring service
  * Upon spring initialization, Spring will gather all classes with this annotation and
- * create a singleton that can be injected into other areas where it is dependant
+ * create a singleton that can be injected into other areas where it is dependent
  */
 @Service
 public class TopicService {
-	private List<Topic> topics = new ArrayList<>(Arrays.asList(
-			new Topic("spring", "Spring Framework", "A framework used to easily generate and implement Spring projects"),
-			new Topic("cars", "Intro to Cars", "Learn everything about the basics of cars"),
-			new Topic("coffee", "How to Make Coffee", "For those Monday mornings")
-	));
 	
+	@Autowired
+	private TopicRepository topicRepository;
+
 	/**
-	 * Returs the list of topics (currently hard-coded)
+	 * Returns the list of topics (currently hard-coded)
 	 * @return List<Topic>
 	 */
 	public List<Topic> getAllTopics() {
+		List<Topic> topics = new ArrayList<>();
+		topicRepository.findAll()
+			.forEach(topics::add);
 		return topics;
 	}
 	
 	/**
-	 * Creates a stream of the List of topics, then iterates over
-	 * the list and filters out topics that match the provided ID
-	 * Returns the first topic returned from the filter
+	 * Indexes the database and returns the topic matching the provided ID
+	 * If no matches are found it returns null
 	 * @param id
 	 * @return Topic
 	 */
 	public Topic getTopic(String id) {
-		return topics
-				.stream()
-				.filter(topic -> topic.getId().equals(id))
-				.findFirst()
-				.get();
+		return topicRepository.findById(id)
+				.orElse(null);
+		
 	}
 	
 	/**
-	 * Adds the provided to the topic list 
+	 * Calls CrudRepository to add Topic to the database 
 	 * @param topic
 	 */
 	public void addTopic(Topic topic) {
-		topics.add(topic);
+		topicRepository.save(topic);
 	}
 	
 	/**
-	 * Updates the value of the topic with the provided ID
+	 * Indexes the database to find a Topic with matching ID
+	 * If a Topic with matching ID is found, it updates the Topic in the DB to the provided Topic
 	 * @param topic
 	 * @param id
 	 */
 	public void updateTopic(Topic topic, String id) {
-		for (int i = 0; i < topics.size(); i = i + 1) {
-			if (topics.get(i).getId().equals(id)) {
-				topics.set(i, topic);
-				return;
-			}
-		}
+		topicRepository.save(topic);
 	}
 	
 	/**
@@ -69,11 +63,6 @@ public class TopicService {
 	 * @param id
 	 */
 	public void deleteTopic(String id) {
-		for (int i = 0; i < topics.size(); i = i + 1) {
-			if (topics.get(i).getId().equals(id)) {
-				topics.remove(i);
-				return;
-			}
-		}
+		topicRepository.deleteById(id);
 	}
 }

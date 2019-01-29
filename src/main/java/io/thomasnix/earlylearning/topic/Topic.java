@@ -1,13 +1,20 @@
 package io.thomasnix.earlylearning.topic;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
- *	Model calss for Topic
+ *	Model class for Topic
+ * The Entity annotation marks this model class as a database entity
  */
+@Entity
 public class Topic {
 
 	/**
 	 * Fields
+	 * The Id annotation marks id as the primary key for the entity in the DB
 	 */
+	@Id
 	private String id;
 	private String name;
 	private String description;

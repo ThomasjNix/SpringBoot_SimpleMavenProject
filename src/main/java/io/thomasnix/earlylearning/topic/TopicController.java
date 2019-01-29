@@ -25,8 +25,7 @@ public class TopicController {
 	 */
 
 	/**
-	 * Returns a (currently) hard-coded list of Topic objects
-	 * FROM the business service
+	 * Returns a list of Topic objects received from the database
 	 * @return List<Topic>
 	 */
 	@RequestMapping("/topics")
@@ -35,7 +34,7 @@ public class TopicController {
 	}
 	
 	/**
-	 * By providing a route paramter in {} notation it is marked to spring as a route variable
+	 * By providing a route parameter in {} notation it is marked to spring as a route variable
 	 * This variable can be accessed with the PathVariable annotation in the method parameters,
 	 * which when paired with a matching variable name, it is passed in from the 
 	 * route params to the method
@@ -45,12 +44,14 @@ public class TopicController {
 	 */
 	
 	/**
-	 * Returns the first topic in list of topics matching the provided ID
+	 * Returns the topic matching the provided ID if it is found in the DB
+	 * If no topics are found, return null
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping("/topics/{id}")
 	public Topic getTopic(@PathVariable String id) {
+
 		return topicService.getTopic(id);
 	}
 	
@@ -70,7 +71,7 @@ public class TopicController {
 	 */
 	
 	/**
-	 * Receives a topic via POST and calls service method to add the topic to the list
+	 * Receives a topic via POST and calls service method to add the topic to the database
 	 */
 	@RequestMapping(method=RequestMethod.POST, value="/topics")
 	public void addTopic(@RequestBody Topic topic) {
