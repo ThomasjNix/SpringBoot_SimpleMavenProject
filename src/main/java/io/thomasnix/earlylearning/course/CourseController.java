@@ -30,9 +30,9 @@ public class CourseController {
 	 * Returns a list of Course objects received from the database
 	 * @return List<Course>
 	 */
-	@RequestMapping("/topics/{id}/courses")
-	public List<Course> getAllCourses(@PathVariable String id) {
-		return courseService.getAllCourses(id);
+	@RequestMapping("/topics/{topicId}/courses")
+	public List<Course> getAllCourses(@PathVariable String topicId) {
+		return courseService.getAllCourses(topicId);
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class CourseController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("topic/{topicId}/courses/{courseId}")
+	@RequestMapping("topics/{topicId}/courses/{courseId}")
 	public Course getCourse(@PathVariable String courseId) {
 
 		return courseService.getCourse(courseId);
@@ -86,6 +86,7 @@ public class CourseController {
 	 */
 	@RequestMapping(method=RequestMethod.PUT, value="/topics/{topicId}/courses/{courseId}")
 	public void updateCourse(@RequestBody Course course, @PathVariable String topicId, @PathVariable String courseId) {
+		course.setTopic(new Topic(topicId, "", ""));
 		courseService.updateCourse(course);
 	}
 	

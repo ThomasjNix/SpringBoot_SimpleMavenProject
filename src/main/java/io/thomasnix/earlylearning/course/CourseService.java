@@ -21,10 +21,10 @@ public class CourseService {
 	 * Returns the list of courses (currently hard-coded)
 	 * @return List<Course>
 	 */
-	public List<Course> getAllCourses(String id) {
-		// TODO: Add get all courses by relation to given topic id
+	public List<Course> getAllCourses(String topicId) {
+		// New method from the CourseRepository to find all courses related to given topicId used here
 		List<Course> courses = new ArrayList<>();
-		courseRepository.findAll()
+		courseRepository.findByTopicId(topicId)
 			.forEach(courses::add);
 		return courses;
 	}

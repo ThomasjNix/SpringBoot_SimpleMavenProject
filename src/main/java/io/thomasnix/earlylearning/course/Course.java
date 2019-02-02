@@ -2,6 +2,7 @@ package io.thomasnix.earlylearning.course;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import io.thomasnix.earlylearning.topic.Topic;
 
@@ -21,6 +22,12 @@ public class Course {
 	private String name;
 	private String description;
 	
+	/**
+	 * Many courses can be related to a single topic, so in order to establish
+	 * this many-to-one relationship in the database, the JPA
+	 * annotation ManyToOne is used
+	 */
+	@ManyToOne
 	private Topic topic;
 
 	/**

@@ -1,5 +1,7 @@
 package io.thomasnix.earlylearning.topic;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 public interface TopicRepository extends CrudRepository<Topic, String> {
@@ -18,4 +20,18 @@ public interface TopicRepository extends CrudRepository<Topic, String> {
 	 *  1. The entity that will be used for the CrudRepository
 	 *  2. The type of the primary key specified by the Id annotation
 	 */
+	
+	/**
+	 * Finds all courses with provided name
+	 * @param name
+	 * @return
+	 */
+	public List<Topic> findByName(String name);
+	
+	/**
+	 * Finds all courses by provided description
+	 * @param description
+	 * @return
+	 */
+	public List<Topic> findByDescription(String description);
 }
